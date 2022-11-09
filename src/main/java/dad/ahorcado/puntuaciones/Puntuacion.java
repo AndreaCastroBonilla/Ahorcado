@@ -1,19 +1,17 @@
 package dad.ahorcado.puntuaciones;
 
-import java.io.Serializable;
+public class Puntuacion {
 
-public class Puntuacion implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String playerName;
 	private int points;
 
 	public Puntuacion(String playerName, int points) {
 		setPlayerName(playerName);
 		setPoints(points);
+	}
+
+	public Puntuacion(String str) {
+		setPlayerName(str);
 	}
 
 	public String getPlayerName() {
@@ -36,5 +34,4 @@ public class Puntuacion implements Serializable{
 	public String toString() {
 		return "Player name: " + playerName + " / Points: " + points;
 	}
-
 }

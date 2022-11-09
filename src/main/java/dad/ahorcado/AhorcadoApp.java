@@ -1,8 +1,8 @@
 package dad.ahorcado;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
@@ -27,16 +27,28 @@ public class AhorcadoApp extends Application {
 			rootController.getPalabras().addAll(Files.readAllLines(PALABRAS_FILE.toPath(), StandardCharsets.UTF_8));
 		}
 
+//		if (PUNTUACIONES_FILE.exists()) {
+//			FileWriter fw = new FileWriter(PUNTUACIONES_FILE);
+//			BufferedWriter bw = new BufferedWriter(fw);
+//			for (int i = 0; i < rootController.getPuntuaciones().size(); i++) {
+//				bw.write(i);
+//			}
+//			bw.close();
+//
+//		}
+
 		if (PUNTUACIONES_FILE.exists()) {
-			FileWriter fw = new FileWriter(PUNTUACIONES_FILE);
-			BufferedWriter bw = new BufferedWriter(fw);
+			BufferedReader br = new BufferedReader(new FileReader(PUNTUACIONES_FILE));
+			String line;
 			for (int i = 0; i < rootController.getPuntuaciones().size(); i++) {
-				bw.write(i);
+
+				line = String.valueOf(rootController.getPuntuaciones().get(i));
+				String[] data = line.split("/");
+				rootController.getPuntuaciones().add(new Puntuacion(data[0], Integer.parseInt(data[1])));
+
 			}
-			bw.close();
-
+			br.close();
 		}
-
 	}
 
 	@Override

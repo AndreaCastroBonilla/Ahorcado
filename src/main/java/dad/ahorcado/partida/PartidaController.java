@@ -93,40 +93,45 @@ public class PartidaController implements Initializable {
 				puntosLabel.setText(String.valueOf(puntos));
 
 			} else {
-
 				intentos--;
 				loadImages(intentos);
-
 			}
 		} else {
-			TextInputDialog dialog = new TextInputDialog("player name");
-			dialog.setTitle("Añadir jugador");
-			dialog.setHeaderText("YOU´RE A WINNER");
-			dialog.setContentText("Escribe tu nombre: ");
-			dialog.setGraphic(new ImageView(this.getClass().getResource("/images/winner1.png").toString()));
-
-			Optional<String> result = dialog.showAndWait();
-			if (result.isPresent()) {
-				puntuacion = new Puntuacion(result.get(), puntos);
-				PuntuacionController.puntuaciones.add(puntuacion);
-			}
-
+			loadWinner();
 		}
 
 		if (intentos == 1) {
-			TextInputDialog dialog = new TextInputDialog("player name");
-			dialog.setTitle("Añadir jugador");
-			dialog.setHeaderText("GAME OVER :(");
-			dialog.setContentText("Escribe tu nombre: ");
-			dialog.setGraphic(new ImageView(this.getClass().getResource("/images/loser1.png").toString()));
-
-			Optional<String> result = dialog.showAndWait();
-			if (result.isPresent()) {
-				puntuacion = new Puntuacion(result.get(), puntos);
-				PuntuacionController.puntuaciones.add(puntuacion);
-			}
+			loadLoser();
 		}
 
+	}
+
+	private void loadWinner() {
+		TextInputDialog dialog = new TextInputDialog("player name");
+		dialog.setTitle("Añadir jugador");
+		dialog.setHeaderText("YOU´RE A WINNER");
+		dialog.setContentText("Escribe tu nombre: ");
+		dialog.setGraphic(new ImageView(this.getClass().getResource("/images/winner1.png").toString()));
+
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()) {
+			puntuacion = new Puntuacion(result.get(), puntos);
+			PuntuacionController.puntuaciones.add(puntuacion);
+		}
+	}
+
+	private void loadLoser() {
+		TextInputDialog dialog = new TextInputDialog("player name");
+		dialog.setTitle("Añadir jugador");
+		dialog.setHeaderText("GAME OVER :(");
+		dialog.setContentText("Escribe tu nombre: ");
+		dialog.setGraphic(new ImageView(this.getClass().getResource("/images/loser1.png").toString()));
+
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()) {
+			puntuacion = new Puntuacion(result.get(), puntos);
+			PuntuacionController.puntuaciones.add(puntuacion);
+		}
 	}
 
 	private boolean faltanLetras(char[] g) {
